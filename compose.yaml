@@ -1,0 +1,29 @@
+services:
+  api:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: sqlite:////data/faran.db
+      AUTO_CREATE_TABLES: "False"
+    ports:
+      - "8000:8000"
+    volumes:
+      - faran_data:/data
+    restart: unless-stopped
+
+  worker:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: sqlite:////data/faran.db
+      AUTO_CREATE_TABLES: "False"
+    command: ["python", "-m", "app.worker"]
+    volumes:
+      - faran_data:/data
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  faran_data:

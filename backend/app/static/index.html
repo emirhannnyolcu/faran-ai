@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f11">
+  <title>FARAN</title>
+  <link rel="stylesheet" href="/static/styles.css?v=3">
+</head>
+<body>
+  <div class="ambient-background" aria-hidden="true"></div>
+
+  <div id="app-shell" class="app-shell">
+    <header class="top-navigation">
+      <button id="sidebar-toggle" class="icon-button menu-button" type="button" aria-label="Menüyü aç" title="Menü">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <button class="brand" type="button" data-view-target="home" aria-label="FARAN ana sayfa">
+        <span class="brand-symbol"><i data-lucide="sparkles"></i></span>
+        <span class="brand-name">FARAN</span>
+      </button>
+
+      <div class="top-utilities">
+        <div class="date-time" aria-label="Tarih ve saat">
+          <i data-lucide="calendar-days"></i>
+          <span id="current-date"></span>
+          <strong id="current-time"></strong>
+        </div>
+        <button id="notification-button" class="icon-button" type="button" aria-label="Bildirimler" title="Bildirimler">
+          <i data-lucide="bell"></i>
+        </button>
+        <button id="profile-button" class="avatar" type="button" aria-label="Profil" title="Profil" aria-expanded="false">FY</button>
+      </div>
+    </header>
+
+    <div id="profile-menu" class="profile-menu" hidden>
+      <div class="profile-menu-header">
+        <span data-i18n="settingsTitle">Ayarlar</span>
+        <strong>FY</strong>
+      </div>
+      <div class="language-setting">
+        <span data-i18n="languageLabel">Dil</span>
+        <div class="language-options" role="group" aria-label="Dil seçimi">
+          <button type="button" data-language="tr">Türkçe</button>
+          <button type="button" data-language="en">English</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar" aria-label="Ana navigasyon">
+      <nav class="sidebar-nav">
+        <button class="nav-item active" type="button" data-view-target="home" title="Ana sayfa">
+          <i data-lucide="home"></i><span data-i18n="navHome">Ana sayfa</span>
+        </button>
+        <button class="nav-item" type="button" data-action="new-goal" title="Yeni hedef">
+          <i data-lucide="target"></i><span data-i18n="navNewGoal">Yeni hedef</span>
+        </button>
+        <button class="nav-item" type="button" data-view-target="memory" title="Hafıza">
+          <i data-lucide="brain-circuit"></i><span data-i18n="navMemory">Hafıza</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-presence">
+        <span id="health-dot" class="presence-dot"></span>
+        <span id="health-label">FARAN hazırlanıyor</span>
+      </div>
+    </aside>
+
+    <main>
+      <section id="home-view" class="view active" aria-labelledby="home-title">
+        <div class="welcome-block">
+          <p id="day-context" class="eyebrow"></p>
+          <h1 id="home-title" data-i18n="homeTitle">Bugün neyi gerçekleştirmek istiyorsun?</h1>
+        </div>
+
+        <div class="command-surface">
+          <div class="command-leading" aria-hidden="true"><i data-lucide="sparkles"></i></div>
+          <label class="sr-only" for="goal-input">FARAN'a hedefini yaz</label>
+          <textarea id="goal-input" maxlength="4000" rows="1" placeholder="Bir hedef, fikir veya karar yaz..." data-i18n-placeholder="goalPlaceholder"></textarea>
+          <div class="command-footer">
+            <span id="composer-state"><i data-lucide="brain-circuit"></i> Hafıza hazır</span>
+            <div class="command-actions">
+              <span id="character-count">0 / 4000</span>
+              <button id="run-goal" class="submit-button" type="button" aria-label="FARAN'ı çalıştır" title="Çalıştır">
+                <i data-lucide="arrow-up"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-suggestions" aria-label="Örnek hedefler">
+          <button type="button" data-prompt-key="weeklyPlan">Haftamı planla</button>
+          <button type="button" data-prompt-key="connectIdeas">Fikirleri bağla</button>
+          <button type="button" data-prompt-key="createGoal">Yeni hedef oluştur</button>
+        </div>
+
+        <section class="overview-section" aria-labelledby="overview-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="workspaceLabel">Çalışma alanın</p>
+              <h2 id="overview-title" data-i18n="nowTitle">Şimdi</h2>
+            </div>
+            <button id="refresh-overview" class="icon-button quiet" type="button" aria-label="Görünümü yenile" title="Yenile">
+              <i data-lucide="refresh-cw"></i>
+            </button>
+          </div>
+
+          <div class="insight-grid">
+            <article class="insight-note tone-mint">
+              <div class="note-topline"><i data-lucide="history"></i><span data-i18n="lastWork">Son çalışma</span></div>
+              <h3 id="latest-memory-title">Henüz bir çalışma yok</h3>
+              <p id="latest-memory-summary">İlk hedefini yazdığında FARAN burada kaldığın yeri hatırlayacak.</p>
+            </article>
+            <article class="insight-note tone-cyan">
+              <div class="note-topline"><i data-lucide="target"></i><span data-i18n="activePlan">Aktif plan</span></div>
+              <strong id="current-task-count">0</strong>
+              <p id="active-plan-copy">Yeni görevler oluşturulmayı bekliyor.</p>
+            </article>
+            <article class="insight-note tone-coral">
+              <div class="note-topline"><i data-lucide="database"></i><span data-i18n="memoryLabel">Hafıza</span></div>
+              <strong id="memory-count">0</strong>
+              <p id="memory-count-copy">Uzun vadeli kayıt</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="workflow-panel" class="processing-panel" aria-live="polite" hidden>
+          <div class="thinking-mark"><i data-lucide="sparkles"></i></div>
+          <div class="processing-copy">
+            <h2 id="workflow-title">FARAN çalışıyor</h2>
+            <p id="workflow-status">Hedefin bağlamı hazırlanıyor.</p>
+          </div>
+          <div class="processing-progress" aria-hidden="true"><span></span></div>
+        </section>
+
+        <section id="result-panel" class="result-panel" aria-labelledby="result-title" hidden>
+          <div class="result-header">
+            <div>
+              <p class="eyebrow" data-i18n="faranAnswer">FARAN'ın yanıtı</p>
+              <h2 id="result-title" data-i18n="roadmapTitle">Uygulanabilir yol haritan</h2>
+            </div>
+            <div class="result-actions">
+              <span id="result-verification" class="verification" hidden><i data-lucide="shield-check"></i> <span data-i18n="verified">Doğrulandı</span></span>
+              <button id="copy-result" class="icon-button quiet" type="button" aria-label="Sonucu kopyala" title="Kopyala"><i data-lucide="copy"></i></button>
+            </div>
+          </div>
+          <div id="final-answer" class="answer"></div>
+          <div id="tasks-block" class="tasks-block" hidden>
+            <h3 data-i18n="nextSteps">Sonraki adımlar</h3>
+            <ol id="task-list" class="task-list"></ol>
+          </div>
+        </section>
+      </section>
+
+      <section id="memory-view" class="view memory-view" aria-labelledby="memory-title">
+        <div class="memory-header">
+          <div>
+            <p class="eyebrow" data-i18n="longTermMemory">Uzun vadeli hafıza</p>
+            <h1 id="memory-title" data-i18n="memoryTitle">Hatırladıkların, düşündüklerini büyütür.</h1>
+          </div>
+          <span id="memory-total" class="memory-total">0 kayıt</span>
+        </div>
+
+        <form id="memory-search-form" class="memory-search" role="search">
+          <i data-lucide="search"></i>
+          <label class="sr-only" for="memory-search-input">Hafızada ara</label>
+          <input id="memory-search-input" type="search" maxlength="2000" autocomplete="off" placeholder="Bir fikir, hedef veya konu ara..." data-i18n-placeholder="memorySearchPlaceholder">
+          <button id="clear-memory-search" class="icon-button quiet" type="button" aria-label="Aramayı temizle" title="Temizle" hidden><i data-lucide="x"></i></button>
+        </form>
+
+        <div id="memory-list" class="memory-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <nav class="mobile-dock" aria-label="Mobil navigasyon">
+      <button class="dock-item active" type="button" data-view-target="home" aria-label="Ana sayfa"><i data-lucide="home"></i><span data-i18n="navHome">Ana sayfa</span></button>
+      <button class="dock-action" type="button" data-action="new-goal" aria-label="Yeni hedef"><i data-lucide="sparkles"></i></button>
+      <button class="dock-item" type="button" data-view-target="memory" aria-label="Hafıza"><i data-lucide="brain-circuit"></i><span data-i18n="navMemory">Hafıza</span></button>
+    </nav>
+  </div>
+
+  <aside id="memory-drawer" class="memory-drawer" aria-labelledby="drawer-title" hidden>
+    <div class="drawer-backdrop" data-action="close-drawer"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <span class="drawer-kicker" data-i18n="memoryDetail">Hafıza detayı</span>
+        <button class="icon-button quiet" type="button" data-action="close-drawer" aria-label="Detayı kapat" title="Kapat"><i data-lucide="x"></i></button>
+      </div>
+      <h2 id="drawer-title"></h2>
+      <p id="drawer-topic" class="drawer-topic"></p>
+      <div id="drawer-summary" class="drawer-summary"></div>
+      <div class="drawer-section">
+        <h3 data-i18n="insightLabel">İçgörü</h3>
+        <p id="drawer-insight"></p>
+      </div>
+      <div class="drawer-section">
+        <h3 data-i18n="connectedMemories">Bağlantılı hafızalar</h3>
+        <div id="drawer-connections"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="/static/assets/lucide.min.js?v=2"></script>
+  <script src="/static/assets/marked.min.js?v=2"></script>
+  <script src="/static/assets/purify.min.js?v=2"></script>
+  <script src="/static/app.js?v=4" defer></script>
+</body>
+</html>
