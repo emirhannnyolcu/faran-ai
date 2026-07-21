@@ -9,7 +9,9 @@ offline runtime with a GPT-5.6 OpenAI Agents SDK runtime.
 Built for OpenAI Build Week in the **Work & Productivity** track with Codex and
 GPT-5.6. See the [Devpost submission copy](docs/DEVPOST_SUBMISSION.md),
 [demo video script](docs/DEMO_VIDEO_SCRIPT.md), and
-[Build Week technical package](docs/BUILD_WEEK.md).
+[Build Week technical package](docs/BUILD_WEEK.md). The
+[development history](docs/BUILD_WEEK_HISTORY.md) separates the pre-existing
+prototype from work completed with Codex and GPT-5.6 during the submission period.
 
 ## Product Flow
 

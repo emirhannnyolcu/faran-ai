@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased - Build Week hardening
+## 2026-07-21 - Build Week hardening
 
 - Added explicit GPT-5.6 Sol/Luna workload roles and strict structured note output.
 - Added persisted reasoning, response chaining, compaction, retry, and prompt-cache settings.
