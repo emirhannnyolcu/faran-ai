@@ -8,6 +8,8 @@
 
 **Track:** Work & Productivity
 
+**Codex Session ID:** `019f6f8a-869f-7283-8af2-46e25c86a483`
+
 ## Inspiration
 
 AI assistants are useful in the moment, but most of their work disappears after the
