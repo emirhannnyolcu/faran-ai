@@ -1,5 +1,7 @@
 # FARAN AI
 
+![FARAN Second Brain workspace](docs/assets/faran-workspace.png)
+
 FARAN is a personal AI workspace that turns a goal into a grounded plan, ordered
 tasks, durable execution state, and long-term memory. It combines a deterministic
 offline runtime with a GPT-5.6 OpenAI Agents SDK runtime.
